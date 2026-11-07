@@ -16,12 +16,14 @@
 <h1>Point</h1>
 
 <p>The Point object represents a point in the two dimensional space of the Paper.js project. It is also used to represent two dimensional vector objects.</p>
+<p>Wherever a point is the only argument of a function, it can also be passed as two numbers, e.g. <code>point.add(10, 20)</code> or <code>item.translate(10, 20)</code>.</p>
 <h4>Example:<span class="description">Create a point at x: 10, y: 5</span></h4>
 
 
 <pre><code>var point = new Point(10, 5);
 console.log(point.x); // 10
 console.log(point.y); // 5</code></pre>
+
 
 </div>
 
@@ -189,6 +191,15 @@ path.fillColor = 'red';</code></pre>
 console.log(point.length); // 10
 console.log(point.angle); // 90</code></pre>
 
+<h4>Example:<span class="description">The angle can also be specified in radians:</span></h4>
+
+
+<pre><code>var point = new Point({
+    length: 10,
+    angleInRadians: Math.PI / 2
+});
+console.log(point.angle); // 90</code></pre>
+
 <h4>Example:<span class="description">Creating a point at x: 10, y: 20 using an object literal:</span></h4>
 
 
@@ -354,7 +365,8 @@ console.log(point); // { x: 100, y: 50 }</code></pre>
 
 
 <pre><code>var point = new Point(5, 10);
-var result = point + 20;
+var result = point + 20; // PaperScript
+var result = point.add(20); // JavaScript
 console.log(result); // {x: 25, y: 30}</code></pre>
 
 	</div>
@@ -395,7 +407,8 @@ console.log(result); // {x: 25, y: 30}</code></pre>
 
 <pre><code>var point1 = new Point(5, 10);
 var point2 = new Point(10, 20);
-var result = point1 + point2;
+var result = point1 + point2; // PaperScript
+var result = point1.add(point2); // JavaScript
 console.log(result); // {x: 15, y: 30}</code></pre>
 
 	</div>
@@ -445,7 +458,8 @@ console.log(result); // {x: 15, y: 30}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point - 5;
+var result = point - 5; // PaperScript
+var result = point.subtract(5); // JavaScript
 console.log(result); // {x: 5, y: 15}</code></pre>
 
 	</div>
@@ -486,7 +500,8 @@ console.log(result); // {x: 5, y: 15}</code></pre>
 
 <pre><code>var firstPoint = new Point(10, 20);
 var secondPoint = new Point(5, 5);
-var result = firstPoint - secondPoint;
+var result = firstPoint - secondPoint; // PaperScript
+var result = firstPoint.subtract(secondPoint); // JavaScript
 console.log(result); // {x: 5, y: 15}</code></pre>
 
 	</div>
@@ -536,7 +551,8 @@ console.log(result); // {x: 5, y: 15}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point * 2;
+var result = point * 2; // PaperScript
+var result = point.multiply(2); // JavaScript
 console.log(result); // {x: 20, y: 40}</code></pre>
 
 	</div>
@@ -577,7 +593,8 @@ console.log(result); // {x: 20, y: 40}</code></pre>
 
 <pre><code>var firstPoint = new Point(5, 10);
 var secondPoint = new Point(4, 2);
-var result = firstPoint * secondPoint;
+var result = firstPoint * secondPoint; // PaperScript
+var result = firstPoint.multiply(secondPoint); // JavaScript
 console.log(result); // {x: 20, y: 20}</code></pre>
 
 	</div>
@@ -627,7 +644,8 @@ console.log(result); // {x: 20, y: 20}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point / 2;
+var result = point / 2; // PaperScript
+var result = point.divide(2); // JavaScript
 console.log(result); // {x: 5, y: 10}</code></pre>
 
 	</div>
@@ -668,7 +686,8 @@ console.log(result); // {x: 5, y: 10}</code></pre>
 
 <pre><code>var firstPoint = new Point(8, 10);
 var secondPoint = new Point(2, 5);
-var result = firstPoint / secondPoint;
+var result = firstPoint / secondPoint; // PaperScript
+var result = firstPoint.divide(secondPoint); // JavaScript
 console.log(result); // {x: 4, y: 2}</code></pre>
 
 	</div>
@@ -718,7 +737,9 @@ console.log(result); // {x: 4, y: 2}</code></pre>
 
 
 <pre><code>var point = new Point(12, 6);
-console.log(point % 5); // {x: 2, y: 1}</code></pre>
+var result = point % 5; // PaperScript
+var result = point.modulo(5); // JavaScript
+console.log(result); // {x: 2, y: 1}</code></pre>
 
 	</div>
 
@@ -757,7 +778,9 @@ console.log(point % 5); // {x: 2, y: 1}</code></pre>
 
 
 <pre><code>var point = new Point(12, 6);
-console.log(point % new Point(5, 2)); // {x: 2, y: 0}</code></pre>
+var result = point % new Point(5, 2); // PaperScript
+var result = point.modulo(new Point(5, 2)); // JavaScript
+console.log(result); // {x: 2, y: 0}</code></pre>
 
 	</div>
 
@@ -816,6 +839,34 @@ console.log(point % new Point(5, 2)); // {x: 2, y: 0}</code></pre>
 		<h4>Type:</h4>
 		<li>
 			<tt>Number</tt>
+		</li>
+	</ul>
+    
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
+<div id="values" class="member">
+<div class="member-link">
+<a name="values" href="#values"><tt><b>values</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The point&rsquo;s coordinates as an array, <code>[x, y]</code>, as <a href="../classes/Matrix.html#values"><tt>matrix.values</tt></a> gives those of a matrix.</p>
+	
+		<p>Read only.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			Array of <tt>Numbers</tt>
 		</li>
 	</ul>
     
@@ -1074,7 +1125,7 @@ path.position.selected = true;
 	
 	<li>
 <tt>point:</tt> 
-<a href="../classes/Point.html"><tt>Point</tt></a>
+<a href="../classes/Point.html"><tt>Point</tt></a>⟋Array of <tt>Numbers</tt>
 
 
 </li>
@@ -1478,6 +1529,42 @@ point2.x = 1; // doesn't change point1.x</code></pre>
 </div>
 
 	
+<div id="negate" class="member">
+<div class="member-link">
+<a name="negate" href="#negate"><tt><b>negate</b>()</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Returns a new point with both coordinates negated. PaperScript uses it for the unary minus operator. The object itself is not modified!</p>
+    
+	
+	
+	<ul class="member-list">
+		<h4>Returns:</h4>
+		
+			<li>
+<tt><a href="../classes/Point.html"><tt>Point</tt></a></tt>&nbsp;&mdash;&nbsp;the negation of the point as a new point
+</li>
+
+		
+	</ul>
+
+
+
+	
+	<h4>Example:</h4>
+
+
+<pre><code>var point = new Point(12, -6);
+var result = -point; // PaperScript
+var result = point.negate(); // JavaScript
+console.log(result); // {x: -12, y: 6}</code></pre>
+
+</div>
+</div>
+</div>
+
+	
 <h3>Tests</h3>
 
 <div id="isinside-rect" class="member">
@@ -1575,7 +1662,7 @@ point2.x = 1; // doesn't change point1.x</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks if the vector represented by this point is collinear (parallel) to another vector.</p>
+	<p>Checks if the vector represented by this point is collinear (parallel) to another vector, within a tolerance of 1e-8 for the sine of the angle between them.</p>
     
 	
 <ul class="member-list">
@@ -1616,7 +1703,7 @@ point2.x = 1; // doesn't change point1.x</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks if the vector represented by this point is orthogonal (perpendicular) to another vector.</p>
+	<p>Checks if the vector represented by this point is orthogonal (perpendicular) to another vector, within a tolerance of 1e-8 for the cosine of the angle between them.</p>
     
 	
 <ul class="member-list">
@@ -1657,7 +1744,7 @@ point2.x = 1; // doesn't change point1.x</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks if this point has both the x and y coordinate set to 0.</p>
+	<p>Checks if this point has both the x and y coordinate set to 0, within a tolerance of 1e-12, unlike <a href="../classes/Point.html#equals-point"><tt>equals(point)</tt></a>, which compares exactly.</p>
     
 	
 	
@@ -1665,7 +1752,7 @@ point2.x = 1; // doesn't change point1.x</code></pre>
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><tt>Boolean</tt></tt>&nbsp;&mdash;&nbsp;<tt>true</tt> if both x and y are 0, <tt>false</tt> otherwise
+<tt><tt>Boolean</tt></tt>&nbsp;&mdash;&nbsp;<tt>true</tt> if both x and y are 0, within the tolerance, <tt>false</tt> otherwise
 </li>
 
 		
@@ -2023,6 +2110,68 @@ console.log(absPoint); // {x: 5, y: 10}</code></pre>
 </div>
 </div>
 
+	
+<div id="clamp-min-max" class="member">
+<div class="member-link">
+<a name="clamp-min-max" href="#clamp-min-max"><tt><b>clamp</b>(min, max)</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Returns a new point with the <a href="../classes/Point.html#x"><tt>x</tt></a> and <a href="../classes/Point.html#y"><tt>y</tt></a> values clamped to the range between the given minimum and maximum points. The object itself is not modified!</p>
+    
+	
+<ul class="member-list">
+	<h4>Parameters:</h4>
+	
+	<li>
+<tt>min:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
+&mdash;&nbsp;the point with the smallest values
+
+</li>
+	
+	<li>
+<tt>max:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
+&mdash;&nbsp;the point with the largest values
+
+</li>
+	
+</ul>
+
+	
+	<ul class="member-list">
+		<h4>Returns:</h4>
+		
+			<li>
+<tt><a href="../classes/Point.html"><tt>Point</tt></a></tt>&nbsp;&mdash;&nbsp;the clamped point as a new point
+</li>
+
+		
+	</ul>
+
+
+
+	
+	<h4>Example:</h4>
+
+
+<pre><code>var point = new Point(-5, 150);
+var clampPoint = point.clamp(new Point(0, 0), new Point(100, 100));
+console.log(clampPoint); // {x: 0, y: 100}</code></pre>
+
+<h4>Example:<span class="description">Keep a point inside a rectangle:</span></h4>
+
+
+<pre><code>var rect = new Rectangle(10, 20, 100, 50);
+var point = new Point(200, 40);
+var clampPoint = point.clamp(rect.topLeft, rect.bottomRight);
+console.log(clampPoint); // {x: 110, y: 40}</code></pre>
+
+</div>
+</div>
+</div>
+
 
 		
 			<h3>Math Operator Functions</h3>
@@ -2068,7 +2217,8 @@ console.log(absPoint); // {x: 5, y: 10}</code></pre>
 
 
 <pre><code>var point = new Point(5, 10);
-var result = point + 20;
+var result = point + 20; // PaperScript
+var result = point.add(20); // JavaScript
 console.log(result); // {x: 25, y: 30}</code></pre>
 
 </div>
@@ -2116,7 +2266,8 @@ console.log(result); // {x: 25, y: 30}</code></pre>
 
 <pre><code>var point1 = new Point(5, 10);
 var point2 = new Point(10, 20);
-var result = point1 + point2;
+var result = point1 + point2; // PaperScript
+var result = point1.add(point2); // JavaScript
 console.log(result); // {x: 15, y: 30}</code></pre>
 
 </div>
@@ -2166,7 +2317,8 @@ console.log(result); // {x: 15, y: 30}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point - 5;
+var result = point - 5; // PaperScript
+var result = point.subtract(5); // JavaScript
 console.log(result); // {x: 5, y: 15}</code></pre>
 
 </div>
@@ -2214,7 +2366,8 @@ console.log(result); // {x: 5, y: 15}</code></pre>
 
 <pre><code>var firstPoint = new Point(10, 20);
 var secondPoint = new Point(5, 5);
-var result = firstPoint - secondPoint;
+var result = firstPoint - secondPoint; // PaperScript
+var result = firstPoint.subtract(secondPoint); // JavaScript
 console.log(result); // {x: 5, y: 15}</code></pre>
 
 </div>
@@ -2264,7 +2417,8 @@ console.log(result); // {x: 5, y: 15}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point * 2;
+var result = point * 2; // PaperScript
+var result = point.multiply(2); // JavaScript
 console.log(result); // {x: 20, y: 40}</code></pre>
 
 </div>
@@ -2312,7 +2466,8 @@ console.log(result); // {x: 20, y: 40}</code></pre>
 
 <pre><code>var firstPoint = new Point(5, 10);
 var secondPoint = new Point(4, 2);
-var result = firstPoint * secondPoint;
+var result = firstPoint * secondPoint; // PaperScript
+var result = firstPoint.multiply(secondPoint); // JavaScript
 console.log(result); // {x: 20, y: 20}</code></pre>
 
 </div>
@@ -2362,7 +2517,8 @@ console.log(result); // {x: 20, y: 20}</code></pre>
 
 
 <pre><code>var point = new Point(10, 20);
-var result = point / 2;
+var result = point / 2; // PaperScript
+var result = point.divide(2); // JavaScript
 console.log(result); // {x: 5, y: 10}</code></pre>
 
 </div>
@@ -2410,7 +2566,8 @@ console.log(result); // {x: 5, y: 10}</code></pre>
 
 <pre><code>var firstPoint = new Point(8, 10);
 var secondPoint = new Point(2, 5);
-var result = firstPoint / secondPoint;
+var result = firstPoint / secondPoint; // PaperScript
+var result = firstPoint.divide(secondPoint); // JavaScript
 console.log(result); // {x: 4, y: 2}</code></pre>
 
 </div>
@@ -2460,7 +2617,9 @@ console.log(result); // {x: 4, y: 2}</code></pre>
 
 
 <pre><code>var point = new Point(12, 6);
-console.log(point % 5); // {x: 2, y: 1}</code></pre>
+var result = point % 5; // PaperScript
+var result = point.modulo(5); // JavaScript
+console.log(result); // {x: 2, y: 1}</code></pre>
 
 </div>
 </div>
@@ -2506,7 +2665,9 @@ console.log(point % 5); // {x: 2, y: 1}</code></pre>
 
 
 <pre><code>var point = new Point(12, 6);
-console.log(point % new Point(5, 2)); // {x: 2, y: 0}</code></pre>
+var result = point % new Point(5, 2); // PaperScript
+var result = point.modulo(new Point(5, 2)); // JavaScript
+console.log(result); // {x: 2, y: 0}</code></pre>
 
 </div>
 </div>
@@ -2690,8 +2851,8 @@ var point = maxPoint * randomPoint;</code></pre>
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

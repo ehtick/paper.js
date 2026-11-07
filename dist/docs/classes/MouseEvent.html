@@ -19,6 +19,7 @@
 
 <p>The MouseEvent object is received by the <a href="../classes/Item.html"><tt>Item</tt></a>&rsquo;s mouse event handlers <a href="../classes/Item.html#onmousedown"><tt>item.onMouseDown</tt></a>, <a href="../classes/Item.html#onmousedrag"><tt>item.onMouseDrag</tt></a>, <a href="../classes/Item.html#onmousemove"><tt>item.onMouseMove</tt></a>, <a href="../classes/Item.html#onmouseup"><tt>item.onMouseUp</tt></a>, <a href="../classes/Item.html#onclick"><tt>item.onClick</tt></a>, <a href="../classes/Item.html#ondoubleclick"><tt>item.onDoubleClick</tt></a>, <a href="../classes/Item.html#onmouseenter"><tt>item.onMouseEnter</tt></a> and <a href="../classes/Item.html#onmouseleave"><tt>item.onMouseLeave</tt></a>. The MouseEvent object is the only parameter passed to these functions and contains information about the mouse event.</p>
 
+
 </div>
 
 
@@ -214,14 +215,14 @@
 <div class="reference-members"><h2>Properties inherited from <a href="../classes/Event.html"><tt>Event</tt></a></h2>
 
 	
-<div id="timestamp" class="member">
+<div id="time" class="member">
 <div class="member-link">
-<a name="timestamp" href="#timestamp"><tt><b>timeStamp</b></tt></a>
+<a name="time" href="#time"><tt><b>time</b></tt></a>
 </div>
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The time at which the event was created, in milliseconds since the epoch.</p>
+	<p>The time at which the event was created, in seconds, as the times of frame events are. Browsers count from the page&rsquo;s time origin, as <code>performance.now()</code> does, while <a href="../classes/View.html#dispatchmouseevent-type-point"><tt>view.dispatchMouseEvent(type, point[, options])</tt></a> and <a href="../classes/View.html#dispatchkeyevent-type-key"><tt>view.dispatchKeyEvent(type, key[, options])</tt></a> use <code>Date.now()</code> unless the host passes a time, so only compare the times of events from the same source.</p>
 	
 		<p>Read only.</p>
 	
@@ -346,8 +347,8 @@
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

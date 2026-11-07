@@ -17,6 +17,7 @@
 
 <p>The Event object is the base class for any of the other event types, such as <a href="../classes/MouseEvent.html"><tt>MouseEvent</tt></a>, <a href="../classes/ToolEvent.html"><tt>ToolEvent</tt></a> and <a href="../classes/KeyEvent.html"><tt>KeyEvent</tt></a>.</p>
 
+
 </div>
 
 
@@ -28,14 +29,14 @@
 		<h2>Properties</h2>
 		
 			
-<div id="timestamp" class="member">
+<div id="time" class="member">
 <div class="member-link">
-<a name="timestamp" href="#timestamp"><tt><b>timeStamp</b></tt></a>
+<a name="time" href="#time"><tt><b>time</b></tt></a>
 </div>
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The time at which the event was created, in milliseconds since the epoch.</p>
+	<p>The time at which the event was created, in seconds, as the times of frame events are. Browsers count from the page&rsquo;s time origin, as <code>performance.now()</code> does, while <a href="../classes/View.html#dispatchmouseevent-type-point"><tt>view.dispatchMouseEvent(type, point[, options])</tt></a> and <a href="../classes/View.html#dispatchkeyevent-type-key"><tt>view.dispatchKeyEvent(type, key[, options])</tt></a> use <code>Date.now()</code> unless the host passes a time, so only compare the times of events from the same source.</p>
 	
 		<p>Read only.</p>
 	
@@ -167,8 +168,8 @@
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

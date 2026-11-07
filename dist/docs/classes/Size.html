@@ -16,6 +16,7 @@
 <h1>Size</h1>
 
 <p>The Size object is used to describe the size or dimensions of something, through its <a href="../classes/Size.html#width"><tt>width</tt></a> and <a href="../classes/Size.html#height"><tt>height</tt></a> properties.</p>
+<p>Wherever a size is the only argument of a function, it can also be passed as two numbers, e.g. <code>size.multiply(2, 3)</code>.</p>
 <h4>Example:<span class="description">Create a size that is 10pt wide and 5pt high, and use it to define a rectangle:</span></h4>
 
 
@@ -24,6 +25,7 @@ console.log(size.width); // 10
 console.log(size.height); // 5
 var rect = new Rectangle(new Point(20, 15), size);
 console.log(rect); // { x: 20, y: 15, width: 10, height: 5 }</code></pre>
+
 
 </div>
 
@@ -320,7 +322,8 @@ console.log(size.height); // 50</code></pre>
 
 
 <pre><code>var size = new Size(5, 10);
-var result = size + 20;
+var result = size + 20; // PaperScript
+var result = size.add(20); // JavaScript
 console.log(result); // {width: 25, height: 30}</code></pre>
 
 	</div>
@@ -361,7 +364,8 @@ console.log(result); // {width: 25, height: 30}</code></pre>
 
 <pre><code>var size1 = new Size(5, 10);
 var size2 = new Size(10, 20);
-var result = size1 + size2;
+var result = size1 + size2; // PaperScript
+var result = size1.add(size2); // JavaScript
 console.log(result); // {width: 15, height: 30}</code></pre>
 
 	</div>
@@ -411,7 +415,8 @@ console.log(result); // {width: 15, height: 30}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size - 5;
+var result = size - 5; // PaperScript
+var result = size.subtract(5); // JavaScript
 console.log(result); // {width: 5, height: 15}</code></pre>
 
 	</div>
@@ -452,7 +457,8 @@ console.log(result); // {width: 5, height: 15}</code></pre>
 
 <pre><code>var firstSize = new Size(10, 20);
 var secondSize = new Size(5, 5);
-var result = firstSize - secondSize;
+var result = firstSize - secondSize; // PaperScript
+var result = firstSize.subtract(secondSize); // JavaScript
 console.log(result); // {width: 5, height: 15}</code></pre>
 
 	</div>
@@ -502,7 +508,8 @@ console.log(result); // {width: 5, height: 15}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size * 2;
+var result = size * 2; // PaperScript
+var result = size.multiply(2); // JavaScript
 console.log(result); // {width: 20, height: 40}</code></pre>
 
 	</div>
@@ -543,7 +550,8 @@ console.log(result); // {width: 20, height: 40}</code></pre>
 
 <pre><code>var firstSize = new Size(5, 10);
 var secondSize = new Size(4, 2);
-var result = firstSize * secondSize;
+var result = firstSize * secondSize; // PaperScript
+var result = firstSize.multiply(secondSize); // JavaScript
 console.log(result); // {width: 20, height: 20}</code></pre>
 
 	</div>
@@ -593,7 +601,8 @@ console.log(result); // {width: 20, height: 20}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size / 2;
+var result = size / 2; // PaperScript
+var result = size.divide(2); // JavaScript
 console.log(result); // {width: 5, height: 10}</code></pre>
 
 	</div>
@@ -634,7 +643,8 @@ console.log(result); // {width: 5, height: 10}</code></pre>
 
 <pre><code>var firstSize = new Size(8, 10);
 var secondSize = new Size(2, 5);
-var result = firstSize / secondSize;
+var result = firstSize / secondSize; // PaperScript
+var result = firstSize.divide(secondSize); // JavaScript
 console.log(result); // {width: 4, height: 2}</code></pre>
 
 	</div>
@@ -684,7 +694,9 @@ console.log(result); // {width: 4, height: 2}</code></pre>
 
 
 <pre><code>var size = new Size(12, 6);
-console.log(size % 5); // {width: 2, height: 1}</code></pre>
+var result = size % 5; // PaperScript
+var result = size.modulo(5); // JavaScript
+console.log(result); // {width: 2, height: 1}</code></pre>
 
 	</div>
 
@@ -723,7 +735,9 @@ console.log(size % 5); // {width: 2, height: 1}</code></pre>
 
 
 <pre><code>var size = new Size(12, 6);
-console.log(size % new Size(5, 2)); // {width: 2, height: 0}</code></pre>
+var result = size % new Size(5, 2); // PaperScript
+var result = size.modulo(new Size(5, 2)); // JavaScript
+console.log(result); // {width: 2, height: 0}</code></pre>
 
 	</div>
 
@@ -782,6 +796,34 @@ console.log(size % new Size(5, 2)); // {width: 2, height: 0}</code></pre>
 		<h4>Type:</h4>
 		<li>
 			<tt>Number</tt>
+		</li>
+	</ul>
+    
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
+<div id="values" class="member">
+<div class="member-link">
+<a name="values" href="#values"><tt><b>values</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The size&rsquo;s dimensions as an array, <code>[width, height]</code>, as <a href="../classes/Matrix.html#values"><tt>matrix.values</tt></a> gives those of a matrix.</p>
+	
+		<p>Read only.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			Array of <tt>Numbers</tt>
 		</li>
 	</ul>
     
@@ -858,7 +900,7 @@ console.log(size % new Size(5, 2)); // {width: 2, height: 0}</code></pre>
 	
 	<li>
 <tt>size:</tt> 
-<a href="../classes/Size.html"><tt>Size</tt></a>
+<a href="../classes/Size.html"><tt>Size</tt></a>⟋Array of <tt>Numbers</tt>
 &mdash;&nbsp;the size to compare to
 
 </li>
@@ -950,6 +992,42 @@ console.log(size != new Size(1, 1)); // true</code></pre>
 </div>
 
 	
+<div id="negate" class="member">
+<div class="member-link">
+<a name="negate" href="#negate"><tt><b>negate</b>()</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Returns a new size with both dimensions negated. PaperScript uses it for the unary minus operator. The object itself is not modified!</p>
+    
+	
+	
+	<ul class="member-list">
+		<h4>Returns:</h4>
+		
+			<li>
+<tt><a href="../classes/Size.html"><tt>Size</tt></a></tt>&nbsp;&mdash;&nbsp;the negation of the size as a new size
+</li>
+
+		
+	</ul>
+
+
+
+	
+	<h4>Example:</h4>
+
+
+<pre><code>var size = new Size(12, -6);
+var result = -size; // PaperScript
+var result = size.negate(); // JavaScript
+console.log(result); // {width: -12, height: 6}</code></pre>
+
+</div>
+</div>
+</div>
+
+	
 <h3>Tests</h3>
 
 <div id="iszero" class="member">
@@ -958,7 +1036,7 @@ console.log(size != new Size(1, 1)); // true</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks if this size has both the width and height set to 0.</p>
+	<p>Checks if this size has both the width and height set to 0, within a tolerance of 1e-12, unlike <a href="../classes/Size.html#equals-size"><tt>equals(size)</tt></a>, which compares exactly.</p>
     
 	
 	
@@ -966,7 +1044,7 @@ console.log(size != new Size(1, 1)); // true</code></pre>
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><tt>Boolean</tt></tt>&nbsp;&mdash;&nbsp;<tt>true</tt> if both width and height are 0, <tt>false</tt> otherwise
+<tt><tt>Boolean</tt></tt>&nbsp;&mdash;&nbsp;<tt>true</tt> if both width and height are 0, within the  tolerance, <tt>false</tt> otherwise
 </li>
 
 		
@@ -1196,7 +1274,8 @@ console.log(absSize); // {x: 5, y: 10}</code></pre>
 
 
 <pre><code>var size = new Size(5, 10);
-var result = size + 20;
+var result = size + 20; // PaperScript
+var result = size.add(20); // JavaScript
 console.log(result); // {width: 25, height: 30}</code></pre>
 
 </div>
@@ -1244,7 +1323,8 @@ console.log(result); // {width: 25, height: 30}</code></pre>
 
 <pre><code>var size1 = new Size(5, 10);
 var size2 = new Size(10, 20);
-var result = size1 + size2;
+var result = size1 + size2; // PaperScript
+var result = size1.add(size2); // JavaScript
 console.log(result); // {width: 15, height: 30}</code></pre>
 
 </div>
@@ -1294,7 +1374,8 @@ console.log(result); // {width: 15, height: 30}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size - 5;
+var result = size - 5; // PaperScript
+var result = size.subtract(5); // JavaScript
 console.log(result); // {width: 5, height: 15}</code></pre>
 
 </div>
@@ -1342,7 +1423,8 @@ console.log(result); // {width: 5, height: 15}</code></pre>
 
 <pre><code>var firstSize = new Size(10, 20);
 var secondSize = new Size(5, 5);
-var result = firstSize - secondSize;
+var result = firstSize - secondSize; // PaperScript
+var result = firstSize.subtract(secondSize); // JavaScript
 console.log(result); // {width: 5, height: 15}</code></pre>
 
 </div>
@@ -1392,7 +1474,8 @@ console.log(result); // {width: 5, height: 15}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size * 2;
+var result = size * 2; // PaperScript
+var result = size.multiply(2); // JavaScript
 console.log(result); // {width: 20, height: 40}</code></pre>
 
 </div>
@@ -1440,7 +1523,8 @@ console.log(result); // {width: 20, height: 40}</code></pre>
 
 <pre><code>var firstSize = new Size(5, 10);
 var secondSize = new Size(4, 2);
-var result = firstSize * secondSize;
+var result = firstSize * secondSize; // PaperScript
+var result = firstSize.multiply(secondSize); // JavaScript
 console.log(result); // {width: 20, height: 20}</code></pre>
 
 </div>
@@ -1490,7 +1574,8 @@ console.log(result); // {width: 20, height: 20}</code></pre>
 
 
 <pre><code>var size = new Size(10, 20);
-var result = size / 2;
+var result = size / 2; // PaperScript
+var result = size.divide(2); // JavaScript
 console.log(result); // {width: 5, height: 10}</code></pre>
 
 </div>
@@ -1538,7 +1623,8 @@ console.log(result); // {width: 5, height: 10}</code></pre>
 
 <pre><code>var firstSize = new Size(8, 10);
 var secondSize = new Size(2, 5);
-var result = firstSize / secondSize;
+var result = firstSize / secondSize; // PaperScript
+var result = firstSize.divide(secondSize); // JavaScript
 console.log(result); // {width: 4, height: 2}</code></pre>
 
 </div>
@@ -1588,7 +1674,9 @@ console.log(result); // {width: 4, height: 2}</code></pre>
 
 
 <pre><code>var size = new Size(12, 6);
-console.log(size % 5); // {width: 2, height: 1}</code></pre>
+var result = size % 5; // PaperScript
+var result = size.modulo(5); // JavaScript
+console.log(result); // {width: 2, height: 1}</code></pre>
 
 </div>
 </div>
@@ -1634,7 +1722,9 @@ console.log(size % 5); // {width: 2, height: 1}</code></pre>
 
 
 <pre><code>var size = new Size(12, 6);
-console.log(size % new Size(5, 2)); // {width: 2, height: 0}</code></pre>
+var result = size % new Size(5, 2); // PaperScript
+var result = size.modulo(new Size(5, 2)); // JavaScript
+console.log(result); // {width: 2, height: 0}</code></pre>
 
 </div>
 </div>
@@ -1816,8 +1906,8 @@ var size = maxSize * randomSize;</code></pre>
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

@@ -17,6 +17,7 @@
 
 <p>A Rectangle specifies an area that is enclosed by it&rsquo;s top-left point (x, y), its width, and its height. It should not be confused with a rectangular path, it is not an item.</p>
 
+
 </div>
 
 <!-- =============================== constructors ========================== -->
@@ -393,6 +394,34 @@
 </div>
 		
 			
+<div id="values" class="member">
+<div class="member-link">
+<a name="values" href="#values"><tt><b>values</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The rectangle&rsquo;s position and size as an array, <code>[x, y, width, height]</code>, as <a href="../classes/Matrix.html#values"><tt>matrix.values</tt></a> gives those of a matrix.</p>
+	
+		<p>Read only.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			Array of <tt>Numbers</tt>
+		</li>
+	</ul>
+    
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
 <div id="point" class="member">
 <div class="member-link">
 <a name="point" href="#point"><tt><b>point</b></tt></a>
@@ -400,7 +429,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The top-left point of the rectangle</p>
+	<p>The top-left point of the rectangle. Setting it moves the whole rectangle, unlike <a href="../classes/Rectangle.html#topleft"><tt>topLeft</tt></a>.</p>
 	
 	
 	
@@ -560,7 +589,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The center point of the rectangle.</p>
+	<p>The center point of the rectangle. Setting it moves the whole rectangle.</p>
 	
 	
 	
@@ -586,7 +615,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The top-left point of the rectangle.</p>
+	<p>The top-left point of the rectangle. Note that this doesn&rsquo;t move the whole rectangle; the bottom-right corner stays where it was.</p>
 	
 	
 	
@@ -612,7 +641,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The top-right point of the rectangle.</p>
+	<p>The top-right point of the rectangle. Note that this doesn&rsquo;t move the whole rectangle; the bottom-left corner stays where it was.</p>
 	
 	
 	
@@ -638,7 +667,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The bottom-left point of the rectangle.</p>
+	<p>The bottom-left point of the rectangle. Note that this doesn&rsquo;t move the whole rectangle; the top-right corner stays where it was.</p>
 	
 	
 	
@@ -664,7 +693,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The bottom-right point of the rectangle.</p>
+	<p>The bottom-right point of the rectangle. Note that this doesn&rsquo;t move the whole rectangle; the top-left corner stays where it was.</p>
 	
 	
 	
@@ -690,7 +719,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The left-center point of the rectangle.</p>
+	<p>The left-center point of the rectangle. Setting it moves the left hand side while the right hand side stays where it was, and moves the whole rectangle vertically.</p>
 	
 	
 	
@@ -716,7 +745,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The top-center point of the rectangle.</p>
+	<p>The top-center point of the rectangle. Setting it moves the top while the bottom stays where it was, and moves the whole rectangle horizontally.</p>
 	
 	
 	
@@ -742,7 +771,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The right-center point of the rectangle.</p>
+	<p>The right-center point of the rectangle. Setting it moves the right hand side while the left hand side stays where it was, and moves the whole rectangle vertically.</p>
 	
 	
 	
@@ -768,7 +797,7 @@
 <div class="member-description hidden">
 
 <div class="member-text">
-	<p>The bottom-center point of the rectangle.</p>
+	<p>The bottom-center point of the rectangle. Setting it moves the bottom while the top stays where it was, and moves the whole rectangle horizontally.</p>
 	
 	
 	
@@ -826,6 +855,7 @@
 <div class="member-text">
 	<p>Specifies whether an item&rsquo;s bounds are to appear as selected.</p>
 <p>Paper.js draws the bounds of items with selected bounds on top of your project. This is very useful when debugging.</p>
+<p>This property is only available on the rectangles returned by <a href="../classes/Item.html#bounds"><tt>item.bounds</tt></a> and <a href="../classes/Item.html#strokebounds"><tt>item.strokeBounds</tt></a>, which are selected independently of each other, each showing its own bounds. Rectangles returned by other getters such as <a href="../classes/Item.html#handlebounds"><tt>item.handleBounds</tt></a> don&rsquo;t have it.</p>
 	
 	
 	
@@ -1548,23 +1578,30 @@ intersectionPath.fillColor = 'red';
 </div>
 
 	
-<div id="scale-amount" class="member">
+<div id="scale-scale" class="member">
 <div class="member-link">
-<a name="scale-amount" href="#scale-amount"><tt><b>scale</b>(amount)</tt></a>
+<a name="scale-scale" href="#scale-scale"><tt><b>scale</b>(scale[, center])</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns a new rectangle scaled by the specified amount from its center.</p>
+	<p>Returns a new rectangle scaled by the specified factor from its center, or from the given center point.</p>
     
 	
 <ul class="member-list">
 	<h4>Parameters:</h4>
 	
 	<li>
-<tt>amount:</tt> 
+<tt>scale:</tt> 
 <tt>Number</tt>
+&mdash;&nbsp;the scale factor
 
+</li>
+	
+	<li>
+<tt>center:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
 
+&mdash;&nbsp;optional, default: <tt><a href="../classes/Rectangle.html#center"><tt>rectangle.center</tt></a></tt>
 </li>
 	
 </ul>
@@ -1591,11 +1628,11 @@ intersectionPath.fillColor = 'red';
 	
 <div id="scale-hor-ver" class="member">
 <div class="member-link">
-<a name="scale-hor-ver" href="#scale-hor-ver"><tt><b>scale</b>(hor, ver)</tt></a>
+<a name="scale-hor-ver" href="#scale-hor-ver"><tt><b>scale</b>(hor, ver[, center])</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns a new rectangle scaled in horizontal direction by the specified <code>hor</code> amount and in vertical direction by the specified <code>ver</code> amount from its center.</p>
+	<p>Returns a new rectangle scaled in horizontal direction by the specified <code>hor</code> factor and in vertical direction by the specified <code>ver</code> factor from its center, or from the given center point.</p>
     
 	
 <ul class="member-list">
@@ -1604,15 +1641,22 @@ intersectionPath.fillColor = 'red';
 	<li>
 <tt>hor:</tt> 
 <tt>Number</tt>
-
+&mdash;&nbsp;the horizontal scale factor
 
 </li>
 	
 	<li>
 <tt>ver:</tt> 
 <tt>Number</tt>
+&mdash;&nbsp;the vertical scale factor
 
+</li>
+	
+	<li>
+<tt>center:</tt> 
+<a href="../classes/Point.html"><tt>Point</tt></a>
 
+&mdash;&nbsp;optional, default: <tt><a href="../classes/Rectangle.html#center"><tt>rectangle.center</tt></a></tt>
 </li>
 	
 </ul>
@@ -1645,8 +1689,8 @@ intersectionPath.fillColor = 'red';
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

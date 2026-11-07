@@ -48,6 +48,7 @@ tool.onMouseDrag = function(event) {
 </div>
 
 
+
 </div>
 
 
@@ -57,6 +58,34 @@ tool.onMouseDrag = function(event) {
 <!-- ================================ properties =========================== -->
 	<div class="reference-members">
 		<h2>Properties</h2>
+		
+			
+<div id="scope" class="member">
+<div class="member-link">
+<a name="scope" href="#scope"><tt><b>scope</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The scope that this tool belongs to.</p>
+	
+		<p>Read only.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<a href="../classes/PaperScope.html"><tt>PaperScope</tt></a>
+		</li>
+	</ul>
+    
+	
+	
+</div>
+
+</div>
+</div>
 		
 			
 <div id="mindistance" class="member">
@@ -105,6 +134,41 @@ tool.onMouseDrag = function(event) {
     
 	
 	
+</div>
+
+</div>
+</div>
+		
+			
+<div id="eventinterval" class="member">
+<div class="member-link">
+<a name="eventinterval" href="#eventinterval"><tt><b>eventInterval</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The interval in milliseconds at which the onMouseDrag event fires again while the mouse button is held, also when the mouse doesn&rsquo;t move. The repeated events are at the last point, with a zero <a href="../classes/ToolEvent.html#delta"><tt>toolEvent.delta</tt></a>. <code>null</code>, the default, or anything up to 0 turns it off.</p>
+	
+	
+	
+		<ul class="member-list">
+			<h4>Default:</h4>
+			<li><tt>null</tt></li>
+		</ul>
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<tt>Number</tt>
+		</li>
+	</ul>
+    
+	
+	<h4>Example:<span class="description">Fire the onMouseDrag event 10 times a second, while the mouse button is held:</span></h4>
+
+
+<pre><code>tool.eventInterval = 100;</code></pre>
+
 </div>
 
 </div>
@@ -243,6 +307,7 @@ tool.onMouseDrag = function(event) {
 
 <div class="member-text">
 	<p>The function to be called the mouse moves within the project view. The function receives a <a href="../classes/ToolEvent.html"><tt>ToolEvent</tt></a> object which contains information about the tool event.</p>
+<p>While the mouse button is held down, the tool calls <a href="../classes/Tool.html#onmousedrag"><tt>onMouseDrag</tt></a> instead, if it defines one, and <code>onMouseMove</code> only otherwise.</p>
 	
 	
 	
@@ -421,6 +486,68 @@ tool.onKeyDown = function(event) {
     }
 }</code></pre>
 
+</div>
+
+</div>
+</div>
+		
+			
+	<h3>Activation Event Handlers</h3>
+
+<div id="onactivate" class="member">
+<div class="member-link">
+<a name="onactivate" href="#onactivate"><tt><b>onActivate</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The function to be called when the tool is activated through <a href="../classes/Tool.html#activate"><tt>activate</tt></a>(). The function receives the previously active tool, which is the tool itself when it was already active.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<tt>Function</tt>⟋<tt>null</tt>
+		</li>
+	</ul>
+    
+	
+	<h4>Example:</h4>
+
+
+<pre><code>tool.onActivate = function(previous) {
+    if (previous == tool) {
+        console.log('The tool was activated again!');
+    }
+}</code></pre>
+
+</div>
+
+</div>
+</div>
+		
+			
+<div id="ondeactivate" class="member">
+<div class="member-link">
+<a name="ondeactivate" href="#ondeactivate"><tt><b>onDeactivate</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The function to be called when another tool is activated through <a href="../classes/Tool.html#activate"><tt>activate</tt></a>() while this one is active, or when this one is removed while active.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<tt>Function</tt>⟋<tt>null</tt>
+		</li>
+	</ul>
+    
+	
+	
 </div>
 
 </div>
@@ -752,8 +879,8 @@ tool.onKeyDown = function(event) {
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

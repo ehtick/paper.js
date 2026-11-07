@@ -20,6 +20,7 @@
 <p>Paper classes can only be accessed through <code>PaperScope</code> objects. Thus in PaperScript they are global, while in JavaScript, they are available on the global <a href="../classes/global.html#paper"><tt>paper</tt></a> object. For JavaScript you can use <a href="../classes/PaperScope.html#install-scope"><tt>paperScope.install(scope)</tt></a> to install the Paper classes and objects on the global scope. Note that when working with more than one scope, this still works for classes, but not for objects like <a href="../classes/PaperScope.html#project"><tt>paperScope.project</tt></a>, since they are not updated in the injected scope if scopes are switched.</p>
 <p>The global <a href="../classes/global.html#paper"><tt>paper</tt></a> object is simply a reference to the currently active <code>PaperScope</code>.</p>
 
+
 </div>
 
 <!-- =============================== constructors ========================== -->
@@ -116,7 +117,9 @@
 <li><tt>settings.insertItems: <tt>Boolean</tt></tt> &mdash; controls whether newly  created items are automatically inserted into the scene graph, by  adding them to <a href="../classes/Project.html#activelayer"><tt>project.activeLayer</tt></a> &mdash;&nbsp;default: <tt>true</tt></li>
 <li><tt>settings.applyMatrix: <tt>Boolean</tt></tt> &mdash; controls what value newly  created items have their <a href="../classes/Item.html#applymatrix"><tt>item.applyMatrix</tt></a> property set to  (Note that not all items can set this to <code>false</code>) &mdash;&nbsp;default: <tt>true</tt></li>
 <li><tt>settings.handleSize: <tt>Number</tt></tt> &mdash; the size of the curve handles  when drawing selections &mdash;&nbsp;default: <tt>4</tt></li>
-<li><tt>settings.hitTolerance: <tt>Number</tt></tt> &mdash; the default tolerance for hit-  tests, when no value is specified &mdash;&nbsp;default: <tt>0</tt></li>
+<li><tt>settings.segmentSize: <tt>Number</tt></tt> &mdash; the size of the segments  when drawing selections, or <code>null</code> to use <code>settings.handleSize</code>, e.g.  with <code>handleSize: 0</code> to only draw the segments and not their handles &mdash;&nbsp;default: <tt>null</tt></li>
+<li><tt>settings.hitTolerance: <tt>Number</tt></tt> &mdash; the default tolerance for hit-  tests, when no value is specified, and for the mouse events of items &mdash;&nbsp;default: <tt>0</tt></li>
+<li><tt>settings.scaleStrokes: <tt>Boolean</tt></tt> &mdash; controls whether applying  a matrix to the content of paths and compound paths also scales their  <a href="../classes/Style.html#strokewidth"><tt>style.strokeWidth</tt></a>, by the geometric mean of the scale factors  for non-uniform scaling. Items that keep their matrix, with  <a href="../classes/Item.html#applymatrix"><tt>item.applyMatrix</tt></a> set to <code>false</code>, scale their strokes when  drawing anyway, unless <a href="../classes/Style.html#strokescaling"><tt>style.strokeScaling</tt></a> is <code>false</code> &mdash;&nbsp;default: <tt>false</tt></li>
 </ul>
 	
 	
@@ -377,6 +380,54 @@
 </div>
 
 	
+<div id="createcanvas-width-height" class="member">
+<div class="member-link">
+<a name="createcanvas-width-height" href="#createcanvas-width-height"><tt><b>createCanvas</b>(width, height)</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Creates a canvas of the given size, or reuses one that was released internally.</p>
+    
+	
+<ul class="member-list">
+	<h4>Parameters:</h4>
+	
+	<li>
+<tt>width:</tt> 
+<tt>Number</tt>
+&mdash;&nbsp;the width of the canvas
+
+</li>
+	
+	<li>
+<tt>height:</tt> 
+<tt>Number</tt>
+&mdash;&nbsp;the height of the canvas
+
+</li>
+	
+</ul>
+
+	
+	<ul class="member-list">
+		<h4>Returns:</h4>
+		
+			<li>
+<tt><tt>HTMLCanvasElement</tt></tt>&nbsp;&mdash;&nbsp;the canvas
+</li>
+
+		
+	</ul>
+
+
+
+	
+	
+</div>
+</div>
+</div>
+
+	
 <div id="activate" class="member">
 <div class="member-link">
 <a name="activate" href="#activate"><tt><b>activate</b>()</tt></a>
@@ -384,6 +435,44 @@
 <div class="member-description hidden">
 <div class="member-text">
 	<p>Activates this PaperScope, so all newly created items will be placed in its active project.</p>
+    
+	
+	
+
+
+	
+	
+</div>
+</div>
+</div>
+
+	
+<div id="clear" class="member">
+<div class="member-link">
+<a name="clear" href="#clear"><tt><b>clear</b>()</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Removes all projects, views and tools of this scope, along with their installed event handlers.</p>
+    
+	
+	
+
+
+	
+	
+</div>
+</div>
+</div>
+
+	
+<div id="remove" class="member">
+<div class="member-link">
+<a name="remove" href="#remove"><tt><b>remove</b>()</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+	<p>Clears this scope and removes it from the list of scopes.</p>
     
 	
 	
@@ -450,8 +539,8 @@
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

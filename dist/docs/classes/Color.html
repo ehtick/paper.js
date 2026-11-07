@@ -58,6 +58,7 @@ circle.fillColor = '#ff0000';
 </div>
 
 
+
 </div>
 
 <!-- =============================== constructors ========================== -->
@@ -219,7 +220,7 @@ circle.fillColor = new Color(0.5);
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-    <p>Creates a HSB, HSL or gradient Color object from the properties of the provided object:</p>
+    <p>Creates a HSB, HSL, gradient or pattern Color object from the properties of the provided object:</p>
     <ul class="member-list">
 <h4>Options:</h4>
 <li><tt>hsb.hue: <tt>Number</tt></tt> &mdash; the hue of the color as a value in degrees  between <code>0</code> and <code>360</code></li>
@@ -235,6 +236,8 @@ circle.fillColor = new Color(0.5);
 <li><tt>gradient.destination: <a href="../classes/Point.html"><tt>Point</tt></a></tt> &mdash; the destination point of the  gradient</li>
 <li><tt>gradient.stops: Array of <a href="../classes/GradientStop.html"><tt>GradientStop</tt></a> objects</tt> &mdash; the gradient stops describing  the gradient, as an alternative to providing a gradient object</li>
 <li><tt>gradient.radial: <tt>Boolean</tt></tt> &mdash; controls whether the gradient is  radial, as an alternative to providing a gradient object</li>
+<li><tt>pattern.pattern: <a href="../classes/PatternDefinition.html"><tt>PatternDefinition</tt></a></tt> &mdash; the pattern whose tiles  the color repeats</li>
+<li><tt>pattern.matrix: <a href="../classes/Matrix.html"><tt>Matrix</tt></a></tt> &mdash; the matrix that places the tiles in  the item&rsquo;s coordinates</li>
 </ul>
     
 <ul class="member-list">
@@ -401,7 +404,7 @@ var circle = new Path.Circle({
 		
 <div id="color-gradient-origin-destination" class="member">
 <div class="member-link">
-<a name="color-gradient-origin-destination" href="#color-gradient-origin-destination"><tt><b>Color</b>(gradient, origin, destination[, highlight])</tt></a>
+<a name="color-gradient-origin-destination" href="#color-gradient-origin-destination"><tt><b>Color</b>(gradient, origin, destination[, highlight[, aspect]])</tt></a>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
@@ -437,6 +440,13 @@ var circle = new Path.Circle({
 <a href="../classes/Point.html"><tt>Point</tt></a>
 
 &mdash;&nbsp;optional
+</li>
+	
+	<li>
+<tt>aspect:</tt> 
+<tt>Number</tt>
+
+&mdash;&nbsp;optional, default: <tt>1</tt>
 </li>
 	
 </ul>
@@ -538,6 +548,83 @@ path.fillColor = gradientColor;
 </div>
 </div>
 	
+		
+<div id="color-pattern" class="member">
+<div class="member-link">
+<a name="color-pattern" href="#color-pattern"><tt><b>Color</b>(pattern[, matrix])</tt></a>
+</div>
+<div class="member-description hidden">
+<div class="member-text">
+    <p>Creates a pattern Color object, which repeats the tiles of the pattern, placed by the matrix in the item&rsquo;s coordinates. As with gradient colors, the matrix is transformed along with the item.</p>
+    
+    
+<ul class="member-list">
+	<h4>Parameters:</h4>
+	
+	<li>
+<tt>pattern:</tt> 
+<a href="../classes/PatternDefinition.html"><tt>PatternDefinition</tt></a>
+
+
+</li>
+	
+	<li>
+<tt>matrix:</tt> 
+<a href="../classes/Matrix.html"><tt>Matrix</tt></a>
+
+&mdash;&nbsp;optional
+</li>
+	
+</ul>
+
+    
+	<ul class="member-list">
+		<h4>Returns:</h4>
+		
+			<li>
+<tt><a href="../classes/Color.html"><tt>Color</tt></a></tt>
+</li>
+
+		
+	</ul>
+
+
+
+    
+    <h4>Example:<span class="description">Filling a rectangle with a dotted pattern, and stroking it with the same pattern, turned by 45 degrees:</span></h4>
+
+<div class="paperscript split">
+
+<div class="buttons">
+<div class="button run">Run</div>
+</div>
+
+<script type="text/paperscript" canvas="canvas-10">
+var dot = new Path.Circle({
+    center: [4, 4],
+    radius: 2,
+    fillColor: 'black'
+});
+var pattern = new PatternDefinition(dot, {
+    tile: new Rectangle(0, 0, 8, 8)
+});
+
+var path = new Path.Rectangle({
+    point: [40, 40],
+    size: [160, 120],
+    strokeWidth: 16
+});
+path.fillColor = new Color(pattern);
+path.strokeColor = new Color(pattern, new Matrix().rotate(45));
+</script>
+<div class="canvas"><canvas width="516" height="200" id="canvas-10"></canvas></div>
+</div>
+
+
+</div>
+</div>
+</div>
+	
 </div>
 
 
@@ -554,7 +641,7 @@ path.fillColor = gradientColor;
 
 
 	<div class="member-text">
-		<p>Returns the addition of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+		<p>Returns the addition of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
 		
 <ul class="member-list">
 	<h4>Parameters:</h4>
@@ -585,9 +672,10 @@ path.fillColor = gradientColor;
 		<h4>Example:</h4>
 
 
-<pre><code>var color = new Color(0.5, 1, 1);
-var result = color + 1;
-console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
+<pre><code>var color = new Color(0.5, 0.25, 0);
+var result = color + 0.25; // PaperScript
+var result = color.add(0.25); // JavaScript
+console.log(result); // { red: 0.75, green: 0.5, blue: 0.25 }</code></pre>
 
 	</div>
 
@@ -627,8 +715,9 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 
 <pre><code>var color1 = new Color(0, 1, 1);
 var color2 = new Color(1, 0, 0);
-var result = color1 + color2;
-console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
+var result = color1 + color2; // PaperScript
+var result = color1.add(color2); // JavaScript
+console.log(result); // { red: 1, green: 1, blue: 1 }</code></pre>
 
 	</div>
 
@@ -645,7 +734,7 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 
 
 	<div class="member-text">
-		<p>Returns the subtraction of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+		<p>Returns the subtraction of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
 		
 <ul class="member-list">
 	<h4>Parameters:</h4>
@@ -677,8 +766,9 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color - 1;
-console.log(result); // { red: 0, blue: 0, green: 0 }</code></pre>
+var result = color - 0.5; // PaperScript
+var result = color.subtract(0.5); // JavaScript
+console.log(result); // { red: 0, green: 0.5, blue: 0.5 }</code></pre>
 
 	</div>
 
@@ -716,10 +806,11 @@ console.log(result); // { red: 0, blue: 0, green: 0 }</code></pre>
 		<h4>Example:</h4>
 
 
-<pre><code>var color1 = new Color(0, 1, 1);
+<pre><code>var color1 = new Color(1, 1, 1);
 var color2 = new Color(1, 0, 0);
-var result = color1 - color2;
-console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
+var result = color1 - color2; // PaperScript
+var result = color1.subtract(color2); // JavaScript
+console.log(result); // { red: 0, green: 1, blue: 1 }</code></pre>
 
 	</div>
 
@@ -736,7 +827,7 @@ console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
 
 
 	<div class="member-text">
-		<p>Returns the multiplication of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+		<p>Returns the multiplication of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
 		
 <ul class="member-list">
 	<h4>Parameters:</h4>
@@ -768,8 +859,9 @@ console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color * 0.5;
-console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
+var result = color * 0.5; // PaperScript
+var result = color.multiply(0.5); // JavaScript
+console.log(result); // { red: 0.25, green: 0.5, blue: 0.5 }</code></pre>
 
 	</div>
 
@@ -809,8 +901,9 @@ console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
 
 <pre><code>var color1 = new Color(0, 1, 1);
 var color2 = new Color(0.5, 0, 0.5);
-var result = color1 * color2;
-console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
+var result = color1 * color2; // PaperScript
+var result = color1.multiply(color2); // JavaScript
+console.log(result); // { red: 0, green: 0, blue: 0.5 }</code></pre>
 
 	</div>
 
@@ -827,7 +920,7 @@ console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
 
 
 	<div class="member-text">
-		<p>Returns the division of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+		<p>Returns the division of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
 		
 <ul class="member-list">
 	<h4>Parameters:</h4>
@@ -859,8 +952,9 @@ console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color / 2;
-console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
+var result = color / 2; // PaperScript
+var result = color.divide(2); // JavaScript
+console.log(result); // { red: 0.25, green: 0.5, blue: 0.5 }</code></pre>
 
 	</div>
 
@@ -899,9 +993,10 @@ console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
 
 
 <pre><code>var color1 = new Color(0, 1, 1);
-var color2 = new Color(0.5, 0, 0.5);
-var result = color1 / color2;
-console.log(result); // { red: 0, blue: 0, green: 1 }</code></pre>
+var color2 = new Color(0.5, 1, 2);
+var result = color1 / color2; // PaperScript
+var result = color1.divide(color2); // JavaScript
+console.log(result); // { red: 0, green: 1, blue: 0.5 }</code></pre>
 
 	</div>
 
@@ -1010,7 +1105,7 @@ console.log(color.type); // 'rgb'</code></pre>
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-10">
+<script type="text/paperscript" canvas="canvas-11">
 var circle = new Path.Circle(new Point(80, 50), 30);
 
 // Fill the circle with red and give it a 20pt green stroke:
@@ -1023,7 +1118,7 @@ circle.style = {
 // Make the stroke half transparent:
 circle.strokeColor.alpha = 0.5;
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-10"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-11"></canvas></div>
 </div>
 
 
@@ -1062,14 +1157,14 @@ circle.strokeColor.alpha = 0.5;
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-11">
+<script type="text/paperscript" canvas="canvas-12">
 var circle = new Path.Circle(new Point(80, 50), 30);
 circle.fillColor = 'blue';
 
 // Blue + red = purple:
 circle.fillColor.red = 1;
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-11"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-12"></canvas></div>
 </div>
 
 
@@ -1106,7 +1201,7 @@ circle.fillColor.red = 1;
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-12">
+<script type="text/paperscript" canvas="canvas-13">
 var circle = new Path.Circle(new Point(80, 50), 30);
 
 // First we set the fill color to red:
@@ -1115,7 +1210,7 @@ circle.fillColor = 'red';
 // Red + green = yellow:
 circle.fillColor.green = 1;
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-12"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-13"></canvas></div>
 </div>
 
 
@@ -1152,7 +1247,7 @@ circle.fillColor.green = 1;
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-13">
+<script type="text/paperscript" canvas="canvas-14">
 var circle = new Path.Circle(new Point(80, 50), 30);
 
 // First we set the fill color to red:
@@ -1161,7 +1256,7 @@ circle.fillColor = 'red';
 // Red + blue = purple:
 circle.fillColor.blue = 1;
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-13"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-14"></canvas></div>
 </div>
 
 
@@ -1228,12 +1323,12 @@ circle.fillColor.blue = 1;
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-14">
+<script type="text/paperscript" canvas="canvas-15">
 var circle = new Path.Circle(new Point(80, 50), 30);
 circle.fillColor = 'red';
 circle.fillColor.hue += 30;
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-14"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-15"></canvas></div>
 </div>
 
 
@@ -1245,7 +1340,7 @@ circle.fillColor.hue += 30;
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-15">
+<script type="text/paperscript" canvas="canvas-16">
 // Create a rectangle shaped path, using the dimensions
 // of the view:
 var path = new Path.Rectangle(view.bounds);
@@ -1255,7 +1350,7 @@ function onFrame(event) {
  path.fillColor.hue += 0.5;
 }
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-15"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-16"></canvas></div>
 </div>
 
 
@@ -1401,7 +1496,7 @@ function onFrame(event) {
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-16">
+<script type="text/paperscript" canvas="canvas-17">
 var path = new Path.Circle({
  center: view.center,
  radius: view.bounds.height * 0.4
@@ -1422,10 +1517,121 @@ function onMouseMove(event) {
  path.fillColor.highlight = event.point;
 }
 </script>
-<div class="canvas"><canvas width="516" height="300" id="canvas-16"></canvas></div>
+<div class="canvas"><canvas width="516" height="300" id="canvas-17"></canvas></div>
 </div>
 
 
+</div>
+
+</div>
+</div>
+		
+			
+<div id="aspect" class="member">
+<div class="member-link">
+<a name="aspect" href="#aspect"><tt><b>aspect</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The aspect of a radial gradient: its radius across the line from the origin to the destination, as a factor of its radius along it, which makes it an ellipse. Transforming a gradient color sets it, so that the gradient stretches, shears and rotates with its item.</p>
+	
+	
+	
+		<ul class="member-list">
+			<h4>Default:</h4>
+			<li><tt>1</tt></li>
+		</ul>
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<tt>Number</tt>
+		</li>
+	</ul>
+    
+	
+	<h4>Example:<span class="description">An elliptical radial gradient, twice as wide as tall:</span></h4>
+
+<div class="paperscript split">
+
+<div class="buttons">
+<div class="button run">Run</div>
+</div>
+
+<script type="text/paperscript" canvas="canvas-18">
+var path = new Path.Ellipse({
+ center: view.center,
+ radius: [80, 40],
+ fillColor: {
+     gradient: {
+         stops: ['yellow', 'red', 'black'],
+         radial: true
+     },
+     origin: view.center,
+     destination: view.center + [80, 0],
+     aspect: 0.5
+ }
+});
+</script>
+<div class="canvas"><canvas width="516" height="200" id="canvas-18"></canvas></div>
+</div>
+
+
+</div>
+
+</div>
+</div>
+		
+			
+	<h3>Pattern Components</h3>
+
+<div id="pattern" class="member">
+<div class="member-link">
+<a name="pattern" href="#pattern"><tt><b>pattern</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The pattern whose tiles the color repeats.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<a href="../classes/PatternDefinition.html"><tt>PatternDefinition</tt></a>
+		</li>
+	</ul>
+    
+	
+	
+</div>
+
+</div>
+</div>
+		
+			
+<div id="matrix" class="member">
+<div class="member-link">
+<a name="matrix" href="#matrix"><tt><b>matrix</b></tt></a>
+</div>
+<div class="member-description hidden">
+
+<div class="member-text">
+	<p>The matrix that places the tiles of the pattern in the item&rsquo;s coordinates.</p>
+	
+	
+	
+	<ul class="member-list">
+		<h4>Type:</h4>
+		<li>
+			<a href="../classes/Matrix.html"><tt>Matrix</tt></a>
+		</li>
+	</ul>
+    
+	
+	
 </div>
 
 </div>
@@ -1701,7 +1907,7 @@ function onMouseMove(event) {
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Transform the gradient color by the specified matrix.</p>
+	<p>Transform the gradient or pattern color by the specified matrix. Radial gradients become ellipses, see <a href="../classes/Color.html#aspect"><tt>aspect</tt></a>, and the stripes of linear gradients keep running across them, also when the matrix scales unevenly or shears. Pattern colors transform their <a href="../classes/Color.html#matrix"><tt>matrix</tt></a>.</p>
     
 	
 <ul class="member-list">
@@ -1710,7 +1916,7 @@ function onMouseMove(event) {
 	<li>
 <tt>matrix:</tt> 
 <a href="../classes/Matrix.html"><tt>Matrix</tt></a>
-&mdash;&nbsp;the matrix to transform the gradient color by
+&mdash;&nbsp;the matrix to transform the color by
 
 </li>
 	
@@ -1737,7 +1943,7 @@ function onMouseMove(event) {
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns the addition of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+	<p>Returns the addition of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
     
 	
 <ul class="member-list">
@@ -1769,9 +1975,10 @@ function onMouseMove(event) {
 	<h4>Example:</h4>
 
 
-<pre><code>var color = new Color(0.5, 1, 1);
-var result = color + 1;
-console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
+<pre><code>var color = new Color(0.5, 0.25, 0);
+var result = color + 0.25; // PaperScript
+var result = color.add(0.25); // JavaScript
+console.log(result); // { red: 0.75, green: 0.5, blue: 0.25 }</code></pre>
 
 </div>
 </div>
@@ -1818,8 +2025,9 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 
 <pre><code>var color1 = new Color(0, 1, 1);
 var color2 = new Color(1, 0, 0);
-var result = color1 + color2;
-console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
+var result = color1 + color2; // PaperScript
+var result = color1.add(color2); // JavaScript
+console.log(result); // { red: 1, green: 1, blue: 1 }</code></pre>
 
 </div>
 </div>
@@ -1835,7 +2043,7 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns the subtraction of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+	<p>Returns the subtraction of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
     
 	
 <ul class="member-list">
@@ -1868,8 +2076,9 @@ console.log(result); // { red: 1, blue: 1, green: 1 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color - 1;
-console.log(result); // { red: 0, blue: 0, green: 0 }</code></pre>
+var result = color - 0.5; // PaperScript
+var result = color.subtract(0.5); // JavaScript
+console.log(result); // { red: 0, green: 0.5, blue: 0.5 }</code></pre>
 
 </div>
 </div>
@@ -1914,10 +2123,11 @@ console.log(result); // { red: 0, blue: 0, green: 0 }</code></pre>
 	<h4>Example:</h4>
 
 
-<pre><code>var color1 = new Color(0, 1, 1);
+<pre><code>var color1 = new Color(1, 1, 1);
 var color2 = new Color(1, 0, 0);
-var result = color1 - color2;
-console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
+var result = color1 - color2; // PaperScript
+var result = color1.subtract(color2); // JavaScript
+console.log(result); // { red: 0, green: 1, blue: 1 }</code></pre>
 
 </div>
 </div>
@@ -1933,7 +2143,7 @@ console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns the multiplication of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+	<p>Returns the multiplication of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
     
 	
 <ul class="member-list">
@@ -1966,8 +2176,9 @@ console.log(result); // { red: 0, blue: 1, green: 1 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color * 0.5;
-console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
+var result = color * 0.5; // PaperScript
+var result = color.multiply(0.5); // JavaScript
+console.log(result); // { red: 0.25, green: 0.5, blue: 0.5 }</code></pre>
 
 </div>
 </div>
@@ -2014,8 +2225,9 @@ console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
 
 <pre><code>var color1 = new Color(0, 1, 1);
 var color2 = new Color(0.5, 0, 0.5);
-var result = color1 * color2;
-console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
+var result = color1 * color2; // PaperScript
+var result = color1.multiply(color2); // JavaScript
+console.log(result); // { red: 0, green: 0, blue: 0.5 }</code></pre>
 
 </div>
 </div>
@@ -2031,7 +2243,7 @@ console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Returns the division of the supplied value to both coordinates of the color as a new color. The object itself is not modified!</p>
+	<p>Returns the division of the supplied value to all components of the color as a new color. The object itself is not modified!</p>
     
 	
 <ul class="member-list">
@@ -2064,8 +2276,9 @@ console.log(result); // { red: 0, blue: 0, green: 0.5 }</code></pre>
 
 
 <pre><code>var color = new Color(0.5, 1, 1);
-var result = color / 2;
-console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
+var result = color / 2; // PaperScript
+var result = color.divide(2); // JavaScript
+console.log(result); // { red: 0.25, green: 0.5, blue: 0.5 }</code></pre>
 
 </div>
 </div>
@@ -2111,9 +2324,10 @@ console.log(result); // { red: 0.25, blue: 0.5, green: 0.5 }</code></pre>
 
 
 <pre><code>var color1 = new Color(0, 1, 1);
-var color2 = new Color(0.5, 0, 0.5);
-var result = color1 / color2;
-console.log(result); // { red: 0, blue: 0, green: 1 }</code></pre>
+var color2 = new Color(0.5, 1, 2);
+var result = color1 / color2; // PaperScript
+var result = color1.divide(color2); // JavaScript
+console.log(result); // { red: 0, green: 1, blue: 0.5 }</code></pre>
 
 </div>
 </div>
@@ -2160,12 +2374,12 @@ console.log(result); // { red: 0, blue: 0, green: 1 }</code></pre>
 <div class="button run">Run</div>
 </div>
 
-<script type="text/paperscript" canvas="canvas-17">
+<script type="text/paperscript" canvas="canvas-19">
 var circle = new Path.Circle(view.center, 50);
 // Set a random color as circle fill color.
 circle.fillColor = Color.random();
 </script>
-<div class="canvas"><canvas width="516" height="100" id="canvas-17"></canvas></div>
+<div class="canvas"><canvas width="516" height="100" id="canvas-19"></canvas></div>
 </div>
 
 
@@ -2179,8 +2393,8 @@ circle.fillColor = Color.random();
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 

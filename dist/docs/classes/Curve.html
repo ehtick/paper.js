@@ -18,6 +18,7 @@
 <p>The Curve object represents the parts of a path that are connected by two following <a href="../classes/Segment.html"><tt>Segment</tt></a> objects. The curves of a path can be accessed through its <a href="../classes/Path.html#curves"><tt>path.curves</tt></a> array.</p>
 <p>While a segment describe the anchor point and its incoming and outgoing handles, a Curve object describes the curve passing between two such segments. Curves and segments represent two different ways of looking at the same thing, but focusing on different aspects. Curves for example offer many convenient ways to work with parts of the path, finding lengths, positions or tangents at given offsets.</p>
 
+
 </div>
 
 <!-- =============================== constructors ========================== -->
@@ -620,6 +621,8 @@
 <div class="member-text">
 	<p>The bounding rectangle of the curve including handles.</p>
 	
+		<p>Read only.</p>
+	
 	
 	
 	<ul class="member-list">
@@ -1120,7 +1123,7 @@
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Checks if this curve has any curve handles set.</p>
+	<p>Checks if this curve has any curve handles set. Handles of which both coordinates are 0 within a tolerance of 1e-12 count as not set, see <a href="../classes/Point.html#iszero"><tt>point.isZero</tt></a>().</p>
     
 	
 	
@@ -1362,7 +1365,7 @@
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Calculates the curve location at the specified offset on the curve.</p>
+	<p>Calculates the curve location at the specified offset on the curve, or <code>null</code> if the offset exceeds the length of the curve.</p>
     
 	
 <ul class="member-list">
@@ -1403,7 +1406,7 @@
 </div>
 <div class="member-description hidden">
 <div class="member-text">
-	<p>Calculates the curve location at the specified curve-time parameter on the curve.</p>
+	<p>Calculates the curve location at the specified curve-time parameter on the curve, or <code>null</code> if the parameter lies outside of <code>0..1</code>.</p>
     
 	
 <ul class="member-list">
@@ -1471,7 +1474,7 @@
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><tt>Number</tt></tt>&nbsp;&mdash;&nbsp;the curve-time parameter at the specified location
+<tt><tt>Number</tt></tt>&nbsp;&mdash;&nbsp;the curve-time parameter at the specified location, or  <code>null</code> if the offset exceeds the length of the curve
 </li>
 
 		
@@ -1594,7 +1597,7 @@
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><a href="../classes/CurveLocation.html"><tt>CurveLocation</tt></a></tt>&nbsp;&mdash;&nbsp;the curve location of the specified point
+<tt><a href="../classes/CurveLocation.html"><tt>CurveLocation</tt></a>⟋<tt>null</tt></tt>&nbsp;&mdash;&nbsp;the curve location of the specified point
 </li>
 
 		
@@ -1635,7 +1638,7 @@
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><tt>Number</tt></tt>&nbsp;&mdash;&nbsp;the length of the path up to the specified point
+<tt><tt>Number</tt>⟋<tt>null</tt></tt>&nbsp;&mdash;&nbsp;the length of the path up to the specified point
 </li>
 
 		
@@ -1676,7 +1679,7 @@
 		<h4>Returns:</h4>
 		
 			<li>
-<tt><tt>Number</tt></tt>&nbsp;&mdash;&nbsp;the curve-time parameter of the specified point
+<tt><tt>Number</tt>⟋<tt>null</tt></tt>&nbsp;&mdash;&nbsp;the curve-time parameter of the specified point
 </li>
 
 		
@@ -2314,8 +2317,8 @@
 
 <!-- =========================== copyright notice ========================== -->
 <p class="footer">
-Paper.js v0.12.15 (develop)<br>
-Copyright &#169; 2011—2021 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
+Paper.js v0.17.0 (develop)<br>
+Copyright &#169; 2011—2026 <a href="http://www.lehni.org" target="_blank">J&uuml;rg Lehni</a> &amp; <a href="http://www.jonathanpuckey.com" target="_blank">Jonathan Puckey</a>. All Rights Reserved.</p>
 <div class="content-end"></div>
 
 
